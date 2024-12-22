@@ -2,6 +2,7 @@ package databases.project.backend.service;
 
 import databases.project.backend.dto.RegisterRequest;
 import databases.project.backend.entity.User;
+import databases.project.backend.entity.Institution;
 import databases.project.backend.entity.Role;
 import databases.project.backend.repository.UserRepository;
 import databases.project.backend.repository.InstitutionRepository;
@@ -27,10 +28,11 @@ public class AuthService {
         user.setPasswordHash(passwordEncoder.encode(request.getPassword()));
         user.setRole(Role.valueOf(request.getRole()));
 
-        if (Role.RESEARCHER.equals(user.getRole())) {
-            user.setInstitution(institutionRepository.findById(request.getInstitutionId())
-                    .orElseThrow(() -> new RuntimeException("Institution not found")));
-        }
+if (Role.RESEARCHER.equals(user.getRole())) {
+    Institution institution = new Institution();
+    institution.setInstitutionId(request.getInstitutionId()); // Assuming institutionId is a string from the form
+    user.setInstitution(institution);
+}
 
         return userRepository.save(user);
     }

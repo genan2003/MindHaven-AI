@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtTokenProvider {
     private final AuthenticationManager authenticationManager;
-    private final String jwtSecret = "SecretKey"; // Use environment variable
+    private final String jwtSecret = "SecretKey";
 
     public JwtTokenProvider(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;

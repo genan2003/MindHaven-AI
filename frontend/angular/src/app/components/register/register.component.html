@@ -1,27 +1,23 @@
-<div>
-    <h2>Register</h2>
-    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
-      <label for="username">Username:</label>
-      <input type="text" id="username" [(ngModel)]="user.username" name="username" required />
-  
-      <label for="email">Email:</label>
-      <input type="email" id="email" [(ngModel)]="user.email" name="email" required />
-  
-      <label for="password">Password:</label>
-      <input type="password" id="password" [(ngModel)]="user.password" name="password" required />
-  
-      <label for="role">Role:</label>
-      <select id="role" [(ngModel)]="user.role" name="role" required>
-        <option value="user">User</option>
-        <option value="researcher">Researcher</option>
-      </select>
-  
-      <div *ngIf="user.role === 'researcher'">
-        <label for="institution">Institution:</label>
-        <input type="text" id="institution" [(ngModel)]="user.institution" name="institution" />
-      </div>
-  
-      <button type="submit">Register</button>
-    </form>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <label for="username">Username</label>
+  <input id="username" formControlName="username" type="text" />
+
+  <label for="email">Email</label>
+  <input id="email" formControlName="email" type="email" />
+
+  <label for="password">Password</label>
+  <input id="password" formControlName="password" type="password" />
+
+  <label for="role">Role</label>
+  <select id="role" formControlName="role">
+    <option value="USER">User</option>
+    <option value="RESEARCHER">Researcher</option>
+  </select>
+
+  <div *ngIf="registerForm.get('role')?.value === 'RESEARCHER'">
+    <label for="institutionId">Institution ID</label>
+    <input id="institutionId" formControlName="institutionId" type="number" />
   </div>
-  
+
+  <button type="submit">Register</button>
+</form>
