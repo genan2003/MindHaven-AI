@@ -1,28 +1,34 @@
-# app/main.py
-from fastapi import FastAPI, HTTPException
-from app.schemas import PredictionRequest, PredictionResponse
-from app.ml.model import UpdateRecommendationModel
-from app.utils import interpret_prediction
+from fastapi import FastAPI
+from pydantic import BaseModel
+from typing import List
+import numpy as np
+from sklearn.linear_model import LogisticRegression
 
+# Define the FastAPI app
 app = FastAPI()
 
-# Load the model
-model = UpdateRecommendationModel()
+# Define the input data model
+class ViewsInput(BaseModel):
+    views: List[int]
 
-@app.get("/")
-def root():
-    return {"message": "Welcome to the AI Update Recommendation API"}
+# Dummy model for demonstration purposes
+model = LogisticRegression()
+X_train = np.random.randint(0, 100, (100, 5))  # Random training data
+y_train = np.random.randint(0, 2, 100)        # Random labels
+model.fit(X_train, y_train)                   # Train the model
 
-@app.post("/predict", response_model=PredictionResponse)
-def predict(data: PredictionRequest):
-    try:
-        # Make prediction
-        prediction = model.predict(data.views)
-        recommended = interpret_prediction(prediction)
-        
-        # Simulate probability (for demo purposes)
-        probability = 0.85 if recommended else 0.15
-        
-        return PredictionResponse(recommended=recommended, probability=probability)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
+@app.post("/predict")
+def predict(input_data: ViewsInput):
+    # Ensure views are valid
+    if any(view < 0 for view in input_data.views):
+        return {"error": "View counts must be non-negative"}
+
+    # Pre-check: If all views are zero, recommend NOT to update
+    if all(view == 0 for view in input_data.views):
+        return {"recommended": False, "probability": 0.0}
+
+    # Pass views to the model for prediction
+    views = input_data.views
+    prediction = model.predict([views])[0]
+    probability = model.predict_proba([views])[0][1]
+    return {"recommended": bool(prediction), "probability": probability}
