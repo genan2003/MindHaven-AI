@@ -1,13 +1,14 @@
 package databases.project.backend.service;
 
-import databases.project.backend.dto.RegisterRequest;
-import databases.project.backend.entity.User;
-import databases.project.backend.entity.Institution;
-import databases.project.backend.entity.Role;
-import databases.project.backend.repository.UserRepository;
-import databases.project.backend.repository.InstitutionRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import databases.project.backend.dto.RegisterRequest;
+import databases.project.backend.entity.Institution;
+import databases.project.backend.entity.Role;
+import databases.project.backend.entity.User;
+import databases.project.backend.repository.InstitutionRepository;
+import databases.project.backend.repository.UserRepository;
 
 @Service
 public class AuthService {

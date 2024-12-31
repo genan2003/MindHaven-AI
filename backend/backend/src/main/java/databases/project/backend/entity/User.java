@@ -1,7 +1,19 @@
 package databases.project.backend.entity;
 
-import jakarta.persistence.*;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
@@ -26,7 +38,23 @@ public class User implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "institution_id", referencedColumnName = "institutionId")
+    @JsonIgnore
     private Institution institution;
+
+    @Column(nullable = true)
+    private String firstName;
+
+    @Column(nullable = true)
+    private String lastName;
+
+    @Column(nullable = true)
+    private String mentalHealthDisorder;
+
+    @Column(nullable = true)
+    private Integer age;
+
+    @Column(nullable = false)
+    private Boolean profileCompleted = false;
 
     // Getters and setters
     public Long getUserId() {
@@ -75,5 +103,45 @@ public class User implements Serializable {
 
     public void setInstitution(Institution institution) {
         this.institution = institution;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getMentalHealthDisorder() {
+        return mentalHealthDisorder;
+    }
+
+    public void setMentalHealthDisorder(String mentalHealthDisorder) {
+        this.mentalHealthDisorder = mentalHealthDisorder;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Boolean getProfileCompleted() {
+        return profileCompleted;
+    }
+
+    public void setProfileCompleted(Boolean profileCompleted) {
+        this.profileCompleted = profileCompleted;
     }
 }

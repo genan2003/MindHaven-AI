@@ -1,0 +1,22 @@
+<div class="complete-profile">
+  <h1>Complete Your Profile</h1>
+  <form (ngSubmit)="onSubmit()">
+    <div>
+      <label for="firstName">First Name</label>
+      <input id="firstName" type="text" [(ngModel)]="profileData.firstName" name="firstName" required />
+    </div>
+    <div>
+      <label for="lastName">Last Name</label>
+      <input id="lastName" type="text" [(ngModel)]="profileData.lastName" name="lastName" required />
+    </div>
+    <div>
+      <label for="age">Age</label>
+      <input id="age" type="number" [(ngModel)]="profileData.age" name="age" required />
+    </div>
+    <div>
+      <label for="mentalHealthDisorder">Mental Health Disorder</label>
+      <input id="mentalHealthDisorder" type="text" [(ngModel)]="profileData.mentalHealthDisorder" name="mentalHealthDisorder" />
+    </div>
+    <button type="submit">Complete Profile</button>
+  </form>
+</div>

@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from '../app/components/register/register.component';
 import { LoginComponent } from '../app/components/login/login.component';
+import { CompleteProfileComponent } from './complete-profile/complete-profile.component';
 
 @NgModule({
   declarations: [AppComponent],
