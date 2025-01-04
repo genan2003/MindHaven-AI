@@ -30,13 +30,18 @@ export class CompleteProfileComponent {
   
     this.authService.completeProfile(this.profileData, username).subscribe({
       next: (response) => {
-        console.log('Profile updated successfully:', response);
+        console.log('Profile updated successfully:', response);  // Log response to verify it
+        
+        // Ensure response contains success message
+        if (response === 'Profile updated and marked as completed.') {
+          // Mark profile as completed in localStorage
+          localStorage.setItem('profileCompleted', 'true');
   
-        // Mark profile as completed in localStorage
-        localStorage.setItem('profileCompleted', 'true');
-  
-        // Redirect to dashboard
-        this.router.navigate(['/dashboard']);
+          // Redirect to dashboard
+          this.router.navigate(['/dashboard']);
+        } else {
+          alert('Profile update failed.');
+        }
       },
       error: (err) => {
         console.error('Error updating profile:', err);
@@ -44,6 +49,7 @@ export class CompleteProfileComponent {
       },
     });
   }
+  
   
   
 }
