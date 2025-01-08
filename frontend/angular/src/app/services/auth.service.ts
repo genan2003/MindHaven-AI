@@ -2,14 +2,38 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { TherapeuticalApp } from '../models/therapeutical-app.model';
+import {jwtDecode} from 'jwt-decode';
+
+
+export interface DecodedToken {
+  sub: string; // username
+  role: string; // user role
+  exp: number; // expiration time
+}
 
 @Injectable({
   providedIn: 'root',
 })
+
+
 export class AuthService {
   private baseUrl = 'http://localhost:8080/api/auth';
 
   constructor(private http: HttpClient) {}
+
+  getUserRole(): string | null {
+    const token = localStorage.getItem('authToken');
+    if (!token) return null;
+
+    try {
+      const decoded: DecodedToken = jwtDecode(token);
+      return decoded.role; // Return the user's role
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
 
   register(user: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/register`, user);
@@ -56,4 +80,27 @@ export class AuthService {
       }
     );
   }
+
+  addApp(app: any): Observable<any> {
+    const token = localStorage.getItem('authToken'); // Retrieve token from localStorage
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+  
+    return this.http.post('http://localhost:8080/api/apps', app, { headers });
+  }
+  
+  
+  getApps(): Observable<TherapeuticalApp[]> {
+    const url = 'http://localhost:8080/api/apps'; // Ensure the base URL is correct
+    console.log('Fetching apps from:', url); // Debug log
+    return this.http.get<TherapeuticalApp[]>(url, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
+    });
+  }
+  
+  
+  
+  
 }

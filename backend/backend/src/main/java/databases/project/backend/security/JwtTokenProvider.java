@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
+import databases.project.backend.entity.User;
+import databases.project.backend.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -27,9 +29,12 @@ public class JwtTokenProvider {
 
     private final UserDetailsService userDetailsService;
 
-    public JwtTokenProvider(@Lazy AuthenticationManager authenticationManager, UserDetailsService userDetailsService) {
+    private final UserRepository userRepository;
+
+    public JwtTokenProvider(@Lazy AuthenticationManager authenticationManager, UserDetailsService userDetailsService, UserRepository userRepository) {
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
+        this.userRepository = userRepository;
     }
 
     public String authenticateAndGenerateToken(String username, String password) {
@@ -39,12 +44,16 @@ public class JwtTokenProvider {
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password)
             );
+            
+            User user = userRepository.findByUsername(username)
+            .orElseThrow(() -> new RuntimeException("User not found"));
     
             System.out.println("Authentication successful for user: " + authentication.getName());
             return Jwts.builder()
-                    .setSubject(authentication.getName())
-                    .signWith(SignatureAlgorithm.HS512, jwtSecret)
-                    .compact();
+            .setSubject(authentication.getName())
+            .claim("role", user.getRole().name()) // Add role to the token
+            .signWith(SignatureAlgorithm.HS512, jwtSecret)
+            .compact();
         } catch (Exception e) {
             System.err.println("Authentication failed for user " + username + ": " + e.getMessage());
             throw new RuntimeException("Authentication failed", e);

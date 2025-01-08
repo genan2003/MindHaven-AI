@@ -1,0 +1,70 @@
+<h2>Dashboard</h2>
+
+<!-- Add App Form -->
+<form (ngSubmit)="addApp()" #appForm="ngForm">
+  <div>
+    <label for="name">Name</label>
+    <input
+      type="text"
+      id="name"
+      [(ngModel)]="app.name"
+      name="name"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="description">Description</label>
+    <textarea
+      id="description"
+      [(ngModel)]="app.description"
+      name="description"
+      required
+    ></textarea>
+  </div>
+
+  <div>
+    <label for="ageGroup">Age Group</label>
+    <input
+      type="text"
+      id="ageGroup"
+      [(ngModel)]="app.ageGroup"
+      name="ageGroup"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="mentalHealthDisorder">Mental Health Disorder</label>
+    <input
+      type="text"
+      id="mentalHealthDisorder"
+      [(ngModel)]="app.mentalHealthDisorder"
+      name="mentalHealthDisorder"
+      required
+    />
+  </div>
+
+  <button type="submit" [disabled]="appForm.invalid">Add App</button>
+</form>
+
+<hr />
+
+<div *ngIf="apps && apps.length > 0; else noApps">
+  <h2>Your Therapeutical Apps</h2>
+  <ul>
+    <li *ngFor="let app of apps">
+      <h3>{{ app.name }}</h3>
+      <p><strong>Description:</strong> {{ app.description }}</p>
+      <p><strong>Age Group:</strong> {{ app.ageGroup }}</p>
+      <p><strong>Mental Health Disorder:</strong> {{ app.mentalHealthDisorder }}</p>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noApps>
+  <p>No apps found. Please add some.</p>
+</ng-template>
+
+
+

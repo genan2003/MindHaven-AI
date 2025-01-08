@@ -1,0 +1,17 @@
+.app-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .app-list li {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .app-list h3 {
+    margin: 0;
+    color: #2c3e50;
+  }
+  
