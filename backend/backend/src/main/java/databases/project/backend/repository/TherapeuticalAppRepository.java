@@ -1,6 +1,7 @@
 package databases.project.backend.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,4 +11,6 @@ public interface TherapeuticalAppRepository extends JpaRepository<TherapeuticApp
     List<TherapeuticApp> findByResearcherUsername(String researcherUsername);
 
     public TherapeuticalAppRepository save(TherapeuticalAppRepository app);
+
+    Optional<TherapeuticApp> findById(int id);
 }

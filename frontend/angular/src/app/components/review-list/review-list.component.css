@@ -1,0 +1,15 @@
+.error-message {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .review-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .review-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  

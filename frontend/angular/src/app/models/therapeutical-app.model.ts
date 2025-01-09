@@ -1,8 +1,12 @@
 export interface TherapeuticalApp {
-    id?: number;
-    name: string;
-    description: string;
-    ageGroup: string;
-    mentalHealthDisorder: string;
-  }
-  
+  appId?: number;
+  name?: string;
+  ageGroup?: string;
+  description?: string;
+  developer?: string;
+  rating?: number;
+  isTrending?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  mentalHealthDisorder?:string;
+}

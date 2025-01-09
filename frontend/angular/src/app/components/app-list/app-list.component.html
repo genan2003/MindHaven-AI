@@ -1,0 +1,6 @@
+<div *ngFor="let app of apps" class="app-card">
+    <h3>{{ app.name }}</h3>
+    <p>{{ app.description }}</p>
+    <a [routerLink]="['/apps', app.appId]">View Details</a>
+  </div>
+  

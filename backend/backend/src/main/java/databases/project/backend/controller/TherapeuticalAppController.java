@@ -2,10 +2,12 @@ package databases.project.backend.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,5 +50,15 @@ public class TherapeuticalAppController {
         return ResponseEntity.ok(apps);
     }
     
+    @GetMapping("/{appId}")
+    public ResponseEntity<?> getAppDetails(@PathVariable Integer appId) {
+        Optional<TherapeuticApp> optionalApp = appRepository.findById(appId);
+
+        if (optionalApp.isPresent()) {
+            return ResponseEntity.ok(optionalApp.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("App not found");
+        }
+    }
 
 }
