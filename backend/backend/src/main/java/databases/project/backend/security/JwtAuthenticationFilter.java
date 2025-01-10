@@ -24,15 +24,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-        String token = jwtTokenProvider.resolveToken(request);
-        if (token != null && jwtTokenProvider.validateToken(token)) {
-            Authentication auth = jwtTokenProvider.getAuthentication(token);
+protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+        throws ServletException, IOException {
+    String token = jwtTokenProvider.resolveToken(request);
+    
+    if (token != null && jwtTokenProvider.validateToken(token)) {
+        // Authenticate and set the security context
+        Authentication auth = jwtTokenProvider.getAuthentication(token);
+        if (auth != null) {
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
-        filterChain.doFilter(request, response);
+    } else {
+        // Token is either invalid or missing; you may want to handle this by returning a 401 or 403 response
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // Or SC_FORBIDDEN
     }
+    
+    filterChain.doFilter(request, response); // Proceed to the next filter in the chain
+}
     
 }
 

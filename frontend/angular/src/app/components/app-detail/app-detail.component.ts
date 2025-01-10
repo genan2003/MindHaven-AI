@@ -39,22 +39,41 @@ export class AppDetailComponent implements OnInit {
   }
 
   fetchAppDetails(): void {
-    this.appService.getAppById(this.appId).subscribe((data) => {
-      this.app = data;
-    });
+    this.appService.getAppById(this.appId).subscribe(
+      (data) => {
+        this.app = data;
+      },
+      (error) => {
+        console.error('Failed to fetch app details:', error);
+      }
+    );
   }
-
+  
   fetchReviews(): void {
-    this.reviewService.getReviewsByAppId(this.appId).subscribe((data) => {
-      this.reviews = data;
-    });
+    this.reviewService.getReviewsByAppId(this.appId).subscribe(
+      (data) => {
+        this.reviews = data;
+      },
+      (error) => {
+        console.error('Failed to fetch reviews:', error);
+      }
+    );
   }
 
   submitReview(): void {
     this.newReview.appId = this.appId;
-    this.reviewService.addReview(this.appId, this.newReview).subscribe((data) => {
-      this.reviews.push(data);
-      this.newReview = { reviewId: 0, appId: 0, userId: 0, rating: 0, reviewText: '', createdAt: '' };
-    });
+  
+    // Assuming this.newReview is properly set and contains the review data
+  
+    // Call the service method to submit the review with the Authorization header
+    this.reviewService.addReview(this.appId, this.newReview).subscribe(
+      (data) => {
+        this.reviews.push(data);
+        this.newReview = { reviewId: 0, appId: 0, userId: 0, rating: 0, reviewText: '', createdAt: '' };
+      },
+      (error) => {
+        console.error('Failed to submit review:', error);
+      }
+    );
   }
 }

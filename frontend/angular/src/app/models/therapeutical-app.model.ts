@@ -1,5 +1,5 @@
 export interface TherapeuticalApp {
-  appId?: number;
+  id?: number;
   name?: string;
   ageGroup?: string;
   description?: string;
