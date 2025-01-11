@@ -1,0 +1,190 @@
+/* Full Page Styling */
+.register-page {
+    font-family: 'Open Sans', serif; /* Use the imported font */
+    background-color: #cd6a9c; /* Pink background */
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center; /* Center the container horizontally */
+    align-items: center; /* Center the container vertically */
+    padding: 1rem; /* Add some padding around the edges */
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent scrolling */
+  }
+  
+  /* Container */
+  .register-container {
+    background-color: #fff; /* White container */
+    border-radius: 15px;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    padding: 1.5rem;
+    width: 90%; /* Make it responsive: take 90% of the screen width */
+    max-width: 1000px; /* Limit the container width */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    gap: 1.5rem; /* Adjust spacing between form and image */
+  }
+  
+  /* Register Form */
+  .register-form {
+    flex: 1;
+    min-width: 300px;
+    padding: 1rem;
+  }
+  
+  .register-form h1 {
+    font-size: 1.5rem; /* Adjust size */
+    color: #4e3b47;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Role Selection */
+  .role-selection {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .role-selection .highlight-button {
+    text-decoration: none;
+    font-size: 1rem; /* Larger size */
+    padding: 0.5rem 0.8rem;
+    color: #cd6a9c;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+    font-weight: 700;
+  }
+  
+  .role-selection .highlight-button::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 3px;
+    background-color: #762e52;
+    transition: width 0.3s ease;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 9999px; /* Fully rounded corners */
+  }
+  
+  .role-selection .highlight-button:hover::after {
+    width: 100%;
+  }
+  
+  .role-selection .highlight-button.selected {
+    color: #762e52;
+  }
+  
+  .role-selection .highlight-button.selected::after {
+    width: 100%; /* Bar remains visible */
+  }
+  
+  /* Form */
+  .register-form p {
+    font-size: 0.8rem; /* Adjust size */
+    color: #4e3b47;
+    margin-bottom: 1rem;
+  }
+  
+  /* Log in Button */
+.register-form p {
+    font-size: 0.8rem; /* Adjust size */
+    color: #4e3b47;
+    margin-bottom: 1rem;
+  }
+  
+  .register-form p a {
+    color: #762e52;
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make it stand out */
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+    display: inline-block; /* Ensures the underline applies only to the text */
+  }
+  
+  .register-form p a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: #762e52;
+    transition: width 0.3s ease;
+    margin-top: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 9999px; /* Rounded underline */
+  }
+  
+  .register-form p a:hover {
+    color: #4e3b47; /* Darken the text color on hover */
+  }
+  
+  .register-form p a:hover::after {
+    width: 100%; /* Underline expands fully on hover */
+  }
+  
+  
+  /* Form Group */
+  .form-group {
+    margin-bottom: 1rem; /* Adjust spacing */
+  }
+  
+  label {
+    font-size: 0.9rem;
+    color: #4e3b47;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  input[type='text'],
+  input[type='email'],
+  input[type='password'] {
+    width: 100%;
+    padding: 0.5rem; /* Adjust size */
+    border: 1px solid #cd6a9c;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: #4e3b47;
+    box-sizing: border-box;
+  }
+  
+  /* Button */
+  .btn-submit {
+    width: 100%;
+    padding: 0.5rem; /* Adjust size */
+    border-radius: 9999px;
+    background-color: #762e52;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .btn-submit:hover {
+    background-color: #5a2340;
+  }
+  
+  /* Image Section */
+  .register-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 250px;
+  }
+  
+  .register-image img {
+    max-width: 70%;
+    height: auto;
+  }
+  

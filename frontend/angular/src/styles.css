@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+/* Reset padding and margin for body and app-root */
+body, app-root {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Optional: Set app-root to take the full screen width */
+  app-root {
+    display: block;
+    width: 100vw;
+  }
+
+  

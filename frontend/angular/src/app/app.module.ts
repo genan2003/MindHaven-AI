@@ -17,11 +17,15 @@ import { ReviewListComponent } from './components/review-list/review-list.compon
 import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { CommonModule } from '@angular/common';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
+    HomeComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

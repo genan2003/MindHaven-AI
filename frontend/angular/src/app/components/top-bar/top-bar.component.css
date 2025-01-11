@@ -1,0 +1,99 @@
+/* Top Bar Styles */
+.top-bar {
+    background-color: #cd6a9c; /* Default pink color */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0; /* Remove padding from the top bar */
+    position: relative; /* For positioning title section */
+    height: 60px; /* Set height for the top bar */
+    overflow: hidden; /* Prevent overflow from title section */
+  }
+  
+  /* Title Section */
+  .title-section {
+    position: relative; /* Keeps it part of the flex layout */
+    height: 100%; /* Match the height of the top bar */
+    width: 250px; /* Fixed width for the title section */
+    background-color: #edafce; /* Light pink for the rounded section */
+    border-bottom-right-radius: 120px; /* Full radius for smooth bottom-half curve */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Ensure it sits above other elements */
+    margin: 0; /* Prevent unintended margins */
+  }
+  
+  .title-section .logo {
+    font-size: 1.5rem; /* Adjust size as needed */
+    font-weight: 900;
+    font-family: 'Merienda', serif; /* Use the imported font */
+    color: #762e52; /* Darker contrast color */
+    text-align: center;
+    margin-left: -10px; /* Slight nudge for better alignment */
+  }
+  
+  /* Navigation Links */
+  .nav-links {
+    flex: 1; /* Take up the remaining space */
+    display: flex;
+    gap: 15rem; /* Space between navigation links */
+    justify-content: center; /* Center the navigation links horizontally */
+    align-items: center; /* Align vertically */
+    height: 100%; /* Match the height of the top bar */
+    z-index: 2; /* Ensure links are above the top bar background */
+    margin-left: auto; /* Ensure no overlap with the title section */
+  }
+  
+  .nav-links a {
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: 'Open Sans', serif; /* Use the imported font */
+    color: #eadbe2; /* Text color */
+    position: relative; /* For positioning the hover animation */
+    transition: color 0.3s ease; /* Smooth color change */
+  }
+  
+  .nav-links a:hover {
+    color: rgb(255, 255, 255); /* Optional: Change text color on hover */
+  }
+  
+  /* Hover Bar Animation */
+  .nav-links a::after {
+    content: ''; /* Empty content for the bar */
+    position: absolute;
+    bottom: -5px; /* Position the bar just below the text */
+    left: 50%; /* Start at the center */
+    width: 0%; /* Start with zero width */
+    height: 3px; /* Height of the bar */
+    background-color: white; /* Bar color */
+    border-radius: 2px; /* Rounded corners */
+    transform: translateX(-50%); /* Center the bar horizontally */
+    transition: width 0.3s ease; /* Smooth width animation */
+  }
+  
+  .nav-links a:hover::after {
+    width: 100%; /* Expand the bar to match the text width */
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .title-section {
+      width: 200px; /* Reduce the title section width */
+    }
+  
+    .title-section .logo {
+      font-size: 1.2rem; /* Adjust font size */
+    }
+  
+    .nav-links {
+      gap: 1.5rem; /* Reduce spacing between links */
+    }
+  
+    .nav-links a {
+      font-size: 0.9rem; /* Reduce font size for smaller screens */
+    }
+  }
+  
