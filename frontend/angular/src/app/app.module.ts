@@ -16,10 +16,12 @@ import { AppDetailComponent } from './components/app-detail/app-detail.component
 import { ReviewListComponent } from './components/review-list/review-list.component';
 import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { CommonModule } from '@angular/common';
+import { TopBarComponent } from './components/top-bar/top-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    TopBarComponent,
   ],
   imports: [
     BrowserModule,
