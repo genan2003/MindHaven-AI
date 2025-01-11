@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   showPassword: boolean = false; // Controls password visibility
-  selectedRole: string = 'Patient'; // Default selected role
+  selectedRole: string = 'USER'; // Default selected role
 
   constructor(
     private fb: FormBuilder,
