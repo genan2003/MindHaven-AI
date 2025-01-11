@@ -7,34 +7,38 @@ import { Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule], // Add FormsModule here
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  credentials = { username: '', password: '' }; // Use this for binding form data
-  loginForm: any; // Remove if not used
+  credentials = { username: '', password: '' }; // For binding form data
+  showPassword: boolean = false; // Controls password visibility
 
-  constructor(private authService: AuthService, private router: Router) {} // Inject services
+  constructor(private authService: AuthService, private router: Router) {}
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 
   onSubmit() {
     console.log('Attempting to log in with credentials:', this.credentials);
-  
+
     this.authService.login(this.credentials).subscribe({
       next: (response) => {
         const token = response.token; // Assuming the token is returned in response.token
         console.log('Received token:', token);
-  
+
         // Decode the token to extract user role and other details
         const userDetails = this.authService.decodeToken(token);
         const role = userDetails.role;
         const profileCompleted = userDetails.profileCompleted; // Assuming profileCompleted is in the token payload
-  
+
         // Store token and username in localStorage
         localStorage.setItem('authToken', token);
         localStorage.setItem('username', this.credentials.username);
         localStorage.setItem('role', role);
-  
+
         // Routing based on role and profile completion status
         if (role === 'RESEARCHER') {
           this.router.navigate(['/dashboard']);
@@ -55,11 +59,4 @@ export class LoginComponent {
       },
     });
   }
-  
-  
-  
-  
-  
-  
-  
 }
