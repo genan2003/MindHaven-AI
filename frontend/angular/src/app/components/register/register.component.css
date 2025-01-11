@@ -8,7 +8,6 @@
     align-items: center; /* Center the container vertically */
     padding: 1rem; /* Add some padding around the edges */
     box-sizing: border-box;
-    overflow: hidden; /* Prevent scrolling */
   }
   
   /* Container */
