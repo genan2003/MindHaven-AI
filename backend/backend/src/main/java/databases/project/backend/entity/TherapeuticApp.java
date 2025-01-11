@@ -19,6 +19,32 @@ public class TherapeuticApp {
     private String ageGroup;
     private String mentalHealthDisorder;
     private String researcherUsername;
+    private int views;
+    private Boolean recommended;
+    private Double probability = 0.0;
+
+    public void setViews(int views){
+        this.views = views;
+    }
+    public int getViews(){
+        return views;
+    }
+
+    public boolean isRecommended() {
+        return recommended;
+    }
+
+    public void setRecommended(boolean recommended) {
+        this.recommended = recommended;
+    }
+
+    public double getProbability() {
+        return probability;
+    }
+
+    public void setProbability(double probability) {
+        this.probability = probability;
+    }
 
     // Getters and setters
     public Long getId() {
