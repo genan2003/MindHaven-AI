@@ -6,6 +6,11 @@
     <a href="/home">HOME</a>
     <a href="/about">ABOUT</a>
     <a href="/chatbot">CHAT BOT</a>
-    <a href="/login">LOGIN</a>
+    <ng-container *ngIf="isLoggedIn; else loggedOut">
+      <a (click)="logout()" class="logout-link">LOGOUT</a>
+    </ng-container>
+    <ng-template #loggedOut>
+      <a href="/login">LOGIN</a>
+    </ng-template>
   </nav>
 </header>

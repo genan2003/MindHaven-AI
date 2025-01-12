@@ -21,7 +21,6 @@ import { AboutComponent } from './pages/about/about.component';
 @NgModule({
   declarations: [
     AppComponent,
-    TopBarComponent,
     HomeComponent,
     AboutComponent,
   ],
@@ -32,7 +31,8 @@ import { AboutComponent } from './pages/about/about.component';
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
-    CommonModule
+    CommonModule,
+    TopBarComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
