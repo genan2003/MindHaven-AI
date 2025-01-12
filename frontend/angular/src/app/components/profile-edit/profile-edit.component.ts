@@ -17,15 +17,17 @@ export class ProfileEditComponent implements OnInit {
   mentalHealthDisorder: string = '';
   errorMessage: string = '';
   successMessage: string = '';
+  username: string = ''; // Add a username field
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
+    this.username = this.authService.getUsernameFromToken(); // Get username from token or localStorage
     this.loadUserProfile(); // Load user data when the component initializes
   }
 
   loadUserProfile(): void {
-    this.authService.getUserProfile().subscribe(
+    this.authService.getUserProfile(this.username).subscribe(
       (response) => {
         // Assuming response contains the current user data
         this.firstName = response.firstName || '';

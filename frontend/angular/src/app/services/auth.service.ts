@@ -119,20 +119,36 @@ export class AuthService {
   updateProfile(profileData: any): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  
+    const username = this.getUsernameFromToken(); // Get the username from the token
+    if (!username) {
+      console.error('No username found in token');
+      // Handle error if username is not found
+    }
 
     return this.http.put(
-      `http://localhost:8080/api/auth/users/${profileData.username}/edit-profile`,
+      `http://localhost:8080/api/auth/users/${username}/edit-profile`,
       profileData,
       { headers }
     );
+}
+
+
+  getUsernameFromToken(): string {
+    const token = localStorage.getItem('authToken');
+    if (!token) return '';
+    const decodedToken = this.decodeToken(token);
+    return decodedToken.sub; // Username is typically stored as `sub` in the JWT token
   }
   
-  getUserProfile(): Observable<any> {
+  
+  getUserProfile(username: string): Observable<any> {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
   
-    return this.http.get('http://localhost:8080/api/auth/users/profile', { headers });
+    return this.http.get(`http://localhost:8080/api/auth/users/profile`, { headers });
   }
+  
   
   
 }
