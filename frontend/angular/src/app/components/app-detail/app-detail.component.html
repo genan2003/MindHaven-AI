@@ -4,12 +4,19 @@
 
   <h3>Reviews</h3>
   <div *ngFor="let review of reviews" class="review">
+    <p>{{ review.username }}</p>
     <p><strong>Rating:</strong> {{ review.rating }}/5</p>
     <p>{{ review.reviewText }}</p>
+    <!-- Only show delete button if loggedInUserId is available and matches the review's userId -->
+    <button
+      *ngIf="loggedInUserId && review.userId === loggedInUserId"
+      (click)="deleteReview(review.reviewId!)"
+    >
+      Delete Review
+    </button>
   </div>
 
-  <h3>Add a Review</h3>
-  <form (ngSubmit)="submitReview()">
+  <form *ngIf="canSubmitReview; else alreadyReviewed" (ngSubmit)="submitReview()">
     <label for="rating">Rating:</label>
     <input
       type="number"
@@ -27,9 +34,10 @@
       name="reviewText"
       required
     ></textarea>
-    <button type="submit">Submit</button>
+    <button type="submit">Submit Review</button>
   </form>
-</div>
-<div *ngIf="!app" class="loading-message">
-  <p>Loading app details...</p>
+
+  <ng-template #alreadyReviewed>
+    <p>You have already submitted a review for this app.</p>
+  </ng-template>
 </div>

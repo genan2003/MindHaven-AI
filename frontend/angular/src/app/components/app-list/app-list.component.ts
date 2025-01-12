@@ -3,6 +3,7 @@ import { TherapeuticalApp } from '../../models/therapeutical-app.model';
 import { TherapeuticAppService } from '../../services/therapeutic-app.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-app-list',
@@ -12,13 +13,19 @@ import { CommonModule } from '@angular/common';
 })
 export class AppListComponent implements OnInit {
   apps: TherapeuticalApp[] = [];
+  isLoggedIn: boolean = false;
 
-  constructor(private appService: TherapeuticAppService) {}
+  constructor(private appService: TherapeuticAppService, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.appService.getApps().subscribe((data) => {
-      console.log(data);
-      this.apps = data;
+      const user = localStorage.getItem('authToken');
+      this.isLoggedIn = user ? true : false;
+      if(this.isLoggedIn) this.appService.getApps().subscribe((data) => {
+        this.apps = data;
     });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

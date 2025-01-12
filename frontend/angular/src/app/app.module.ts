@@ -11,10 +11,8 @@ import { LoginComponent } from './components/login/login.component';
 import { CompleteProfileComponent } from './components/complete-profile/complete-profile.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
-import { AppListComponent } from './components/app-list/app-list.component'; // Added
+import { AppListComponent } from './components/app-list/app-list.component'; 
 import { AppDetailComponent } from './components/app-detail/app-detail.component';
-import { ReviewListComponent } from './components/review-list/review-list.component';
-import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { CommonModule } from '@angular/common';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { HomeComponent } from './pages/home/home.component';

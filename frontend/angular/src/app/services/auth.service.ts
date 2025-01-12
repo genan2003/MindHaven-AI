@@ -4,12 +4,15 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { TherapeuticalApp } from '../models/therapeutical-app.model';
 import {jwtDecode} from 'jwt-decode';
+import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 export interface DecodedToken {
   sub: string; // username
   role: string; // user role
   exp: number; // expiration time
+  imports: [RouterModule];
 }
 
 @Injectable({
@@ -20,7 +23,7 @@ export interface DecodedToken {
 export class AuthService {
   private baseUrl = 'http://localhost:8080/api/auth';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getUserRole(): string | null {
     const token = localStorage.getItem('authToken');
@@ -98,6 +101,20 @@ export class AuthService {
     return this.http.get<TherapeuticalApp[]>(url, {
       headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
     });
+  }
+
+  logout(): void {
+    // Remove the JWT token from storage
+    localStorage.removeItem('authToken'); 
+    localStorage.removeItem('username');
+    localStorage.removeItem('role');
+    localStorage.removeItem('profileCompleted');
+    
+    // Optionally make a request to the backend to log out (if desired)
+    // this.http.post('/api/auth/logout', {}).subscribe();
+
+    // Redirect the user to the login page
+    this.router.navigate(['/login']);
   }
   
   

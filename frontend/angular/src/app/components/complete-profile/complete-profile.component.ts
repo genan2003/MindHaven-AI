@@ -38,7 +38,7 @@ export class CompleteProfileComponent {
           localStorage.setItem('profileCompleted', 'true');
   
           // Redirect to dashboard
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/apps']);
         } else {
           alert('Profile update failed.');
         }

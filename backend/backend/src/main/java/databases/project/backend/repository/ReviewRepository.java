@@ -12,6 +12,8 @@ import java.util.Optional;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
+    boolean existsByAppIdAndUserId(Long appId, Long userId);
+
     // Find all reviews for a specific app
     List<Review> findByAppId(Long appId);
 

@@ -1,8 +1,17 @@
-<div *ngFor="let app of apps" class="app-card">
+<div *ngIf="!isLoggedIn; else appsList">
+  <p>You must first log in to view apps.</p>
+  <a [routerLink]="['/login']">
+    <button>Log In</button>
+  </a>
+</div>
+
+<ng-template #appsList>
+  <div *ngFor="let app of apps" class="app-card">
     <h3>{{ app.name }}</h3>
     <p>{{ app.description }}</p>
     <p> hello </p>
     <p>{{ app.id }}</p>
     <a [routerLink]="['/apps', app.id]">View Details</a>
   </div>
-  
+  <button (click)="logout()">Log Out</button>
+</ng-template>

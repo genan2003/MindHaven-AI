@@ -2,13 +2,18 @@ package databases.project.backend.controller;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import databases.project.backend.entity.User;
 import databases.project.backend.repository.UserRepository;
 
+import java.security.Principal;
 import java.util.Map;
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/auth/users")
