@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./app-list.component.css']
 })
 export class AppListComponent implements OnInit {
-  apps: TherapeuticalApp[] = [];
+  apps: TherapeuticalApp[] = []; // All fetched apps
   filteredApps: TherapeuticalApp[] = []; // Apps after applying filters
   searchQuery: string = ''; // Store the search query for app name
   selectedAgeGroup: string = ''; // Store selected age group for filtering
@@ -25,12 +25,15 @@ export class AppListComponent implements OnInit {
   constructor(private appService: TherapeuticAppService, private authService: AuthService) {}
 
   ngOnInit(): void {
-      const user = localStorage.getItem('authToken');
-      this.isLoggedIn = user ? true : false;
-      if(this.isLoggedIn) this.appService.getApps().subscribe((data) => {
+    const user = localStorage.getItem('authToken');
+    this.isLoggedIn = user ? true : false;
+    if (this.isLoggedIn) {
+      this.appService.getApps().subscribe((data) => {
         this.apps = data;
-        this.generateFilters();
-    });
+        this.filteredApps = [...this.apps]; // Initially show all apps
+        this.generateFilters(); // Generate filter options based on all apps
+      });
+    }
   }
 
   generateFilters() {
@@ -49,19 +52,33 @@ export class AppListComponent implements OnInit {
 
   // Apply filters based on search query, selected age group, and selected disorder
   filterApps() {
-    this.filteredApps = this.apps.filter((app) => {
-      const matchesName = this.searchQuery
-        ? app.name!.toLowerCase().includes(this.searchQuery.toLowerCase())
-        : true;
-      const matchesAgeGroup = this.selectedAgeGroup
-        ? app.ageGroup === this.selectedAgeGroup
-        : true;
-      const matchesDisorder = this.selectedDisorder
-        ? app.mentalHealthDisorder === this.selectedDisorder
-        : true;
+    // Check if there are any filters applied
+    if (this.searchQuery || this.selectedAgeGroup || this.selectedDisorder) {
+      this.filteredApps = this.apps.filter((app) => {
+        const matchesName = this.searchQuery
+          ? app.name!.toLowerCase().includes(this.searchQuery.toLowerCase())
+          : true;
+        const matchesAgeGroup = this.selectedAgeGroup
+          ? app.ageGroup === this.selectedAgeGroup
+          : true;
+        const matchesDisorder = this.selectedDisorder
+          ? app.mentalHealthDisorder === this.selectedDisorder
+          : true;
 
-      return matchesName && matchesAgeGroup && matchesDisorder;
-    });
+        return matchesName && matchesAgeGroup && matchesDisorder;
+      });
+    } else {
+      // If no filters, show all apps
+      this.filteredApps = [...this.apps];
+    }
+  }
+
+  // Reset all filters to show all apps
+  resetFilters() {
+    this.searchQuery = '';
+    this.selectedAgeGroup = '';
+    this.selectedDisorder = '';
+    this.filteredApps = [...this.apps]; // Reset the app list to show all apps
   }
 
   logout() {

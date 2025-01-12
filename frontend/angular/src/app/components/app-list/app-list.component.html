@@ -6,36 +6,33 @@
 </div>
 
 <ng-template #appsList>
-  <div *ngFor="let app of apps" class="app-card">
-    <h3>{{ app.name }}</h3>
+  <!-- Filters Section -->
+  <div class="search-filters">
+    <!-- Search by app name -->
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Search by app name" (input)="filterApps()" />
+
+    <!-- Filter by age group -->
+    <select [(ngModel)]="selectedAgeGroup" (change)="filterApps()">
+      <option value="">Select Age Group</option>
+      <option *ngFor="let ageGroup of ageGroups" [value]="ageGroup">{{ ageGroup }}</option>
+    </select>
+
+    <!-- Filter by mental health disorder -->
+    <select [(ngModel)]="selectedDisorder" (change)="filterApps()">
+      <option value="">Select Disorder</option>
+      <option *ngFor="let disorder of disorders" [value]="disorder">{{ disorder }}</option>
+    </select>
+
+    <!-- Reset Filters Button -->
+    <button (click)="resetFilters()">Reset Filters</button>
+  </div>
+
+  <!-- Display Apps -->
+  <div *ngFor="let app of filteredApps" class="app-card">
+    <h3>
+      <a [routerLink]="['/apps', app.id]">{{ app.name }}</a> ({{ app.ageGroup }})
+    </h3>
     <p>{{ app.description }}</p>
-    <p> hello </p>
-    <p>{{ app.id }}</p>
-    <a [routerLink]="['/apps', app.id]">View Details</a>
   </div>
   <button (click)="logout()">Log Out</button>
 </ng-template>
-
-<div class="search-filters">
-  <!-- Search by app name -->
-  <input type="text" [(ngModel)]="searchQuery" placeholder="Search by app name" (input)="filterApps()" />
-
-  <!-- Filter by age group -->
-  <select [(ngModel)]="selectedAgeGroup" (change)="filterApps()">
-    <option value="">Select Age Group</option>
-    <option *ngFor="let ageGroup of ageGroups" [value]="ageGroup">{{ ageGroup }}</option>
-  </select>
-
-  <!-- Filter by mental health disorder -->
-  <select [(ngModel)]="selectedDisorder" (change)="filterApps()">
-    <option value="">Select Disorder</option>
-    <option *ngFor="let disorder of disorders" [value]="disorder">{{ disorder }}</option>
-  </select>
-</div>
-
-<!-- List of filtered apps -->
-<ul>
-  <li *ngFor="let app of filteredApps">
-    <a [routerLink]="['/apps', app.id]">{{ app.name }} ({{ app.ageGroup }}) - {{ app.mentalHealthDisorder }}</a>
-  </li>
-</ul>
