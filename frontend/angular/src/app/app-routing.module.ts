@@ -8,22 +8,35 @@ import { UnauthorizedComponent } from './components/unauthorized/unauthorized.co
 import { AppListComponent } from './components/app-list/app-list.component';
 import { AppDetailComponent } from './components/app-detail/app-detail.component';
 import { ResearcherGuard } from './guards/researcher.guard';
+import { LoggedInGuard } from './guards/logged-in.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'about', component: AboutComponent }, // About page
-  { path: 'register', component: RegisterComponent }, // Registration route
-  { path: 'login', component: LoginComponent }, // Login route
-  { path: 'complete-profile', component: CompleteProfileComponent }, // Profile completion route
-  { path: 'dashboard', component: DashboardComponent, canActivate: [ResearcherGuard] }, // Dashboard route with guard
-  { path: 'unauthorized', component: UnauthorizedComponent }, // Unauthorized access route
-  { path: 'apps', component: AppListComponent }, // Route to list all apps
-  { path: 'apps/:id', component: AppDetailComponent }, // Route for app details
-  { path: '**', redirectTo: '', pathMatch: 'full' } // Redirect any undefined routes to Home
-  
+  // Default route: Redirect based on login status
+  {
+    path: '',
+    canActivate: [LoggedInGuard], // Guard determines if the user should be redirected to /apps
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+    ],
+  },
+
+  // Public routes
+  { path: 'home', component: HomeComponent, canActivate: [LoggedInGuard] },
+  { path: 'about', component: AboutComponent, canActivate: [LoggedInGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [LoggedInGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [LoggedInGuard] },
+
+  // Private routes
+  { path: 'complete-profile', component: CompleteProfileComponent, canActivate: [LoggedInGuard] },
+  { path: 'apps', component: AppListComponent, canActivate: [LoggedInGuard] },
+  { path: 'apps/:id', component: AppDetailComponent, canActivate: [LoggedInGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [ResearcherGuard] },
+
+  // Unauthorized and fallback routes
+  { path: 'unauthorized', component: UnauthorizedComponent },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -45,7 +45,7 @@ export class LoginComponent {
           this.router.navigate(['/dashboard']);
         } else if (role === 'USER') {
           if (profileCompleted) {
-            this.router.navigate(['/user-homepage']);
+            this.router.navigate(['/apps']);
           } else {
             this.router.navigate(['/complete-profile']);
           }
