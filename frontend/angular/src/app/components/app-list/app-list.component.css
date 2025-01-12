@@ -1,0 +1,137 @@
+/* Page Styling */
+.app-list-page {
+    font-family: 'Open Sans', serif;
+    background-color: #fce4ec; /* Light pink background */
+    min-height: calc(100vh - 60px); /* Account for the top bar */
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+  }
+  
+  /* Main Container */
+  .app-list-container {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 2rem;
+    width: 80%;
+    max-width: 1200px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  /* Title */
+  .page-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #762e52; /* Accent color */
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  /* Filters Section */
+  .search-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .search-input {
+    padding: 0.5rem;
+    border: 1px solid #cd6a9c;
+    border-radius: 15px;
+    font-size: 1rem;
+    color: #4e3b47;
+    flex: 1;
+    max-width: 250px;
+    background-color: #fce4ec; /* Same background color as the page */
+  }
+  
+  .filter-select {
+    padding: 0.5rem;
+    border: 1px solid #cd6a9c;
+    border-radius: 15px;
+    font-size: 1rem;
+    color: #4e3b47;
+    flex: 1;
+    max-width: 250px;
+    background-color: #fce4ec; /* Same background color as the page */
+  }
+  
+  .filter-button {
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    background-color: #762e52;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .filter-button:hover {
+    background-color: #5a2340;
+  }
+  
+  /* App List */
+  .app-list {
+    max-height: 50vh; /* Limit height of the app list for scrollability */
+    overflow-y: auto; /* Make entries scrollable */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Add space between app cards */
+  }
+  
+  /* App Cards */
+  .app-card {
+    padding: 0.5rem;
+    border: 2px solid #cd6a9c; /* Slightly thicker border */
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: calc(100% - 1rem); /* Make the cards slightly smaller by subtracting some space */
+    max-width: 95%; /* Limit the maximum width to prevent interference with scrollbar */
+  }
+  
+  /* App Name Styling */
+  .app-card h3 a {
+    color: #762e52; /* Accent color */
+    text-decoration: none; /* Remove hyperlink styling */
+    font-weight: bold;
+    font-size: 1.2rem;
+    position: relative; /* For the hover animation */
+    display: inline-block; /* Ensures animation only spans the text width */
+    transition: color 0.3s ease; /* Smooth color change */
+  }
+  
+  .app-card h3 a:hover {
+    color: #5a2340; /* Darker shade on hover */
+  }
+  
+  /* Hover Bar Animation */
+  .app-card h3 a::after {
+    content: ''; /* Empty pseudo-element for the bar */
+    position: absolute;
+    bottom: -3px; /* Position the bar just below the text */
+    left: 50%; /* Start at the center */
+    width: 0; /* Start with zero width */
+    height: 3px; /* Height of the bar */
+    background-color: #a14372; /* Bar color */
+    border-radius: 999px; /* Rounded edges */
+    transform: translateX(-50%); /* Center the bar */
+    transition: width 0.3s ease; /* Smooth width transition */
+  }
+  
+  .app-card h3 a:hover::after {
+    width: 100%; /* Expand the bar to the full width of the text */
+  }
+  
