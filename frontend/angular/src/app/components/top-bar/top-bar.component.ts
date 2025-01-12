@@ -25,6 +25,6 @@ export class TopBarComponent implements OnInit {
     // Logout logic
     this.authService.logout(); // Clear the user's session
     this.isLoggedIn = false; // Update the login state
-    this.router.navigate(['/login']); // Redirect to the login page
+    this.router.navigate(['/home']); // Redirect to the login page
   }
 }

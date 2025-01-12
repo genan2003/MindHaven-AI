@@ -114,7 +114,7 @@ export class AuthService {
     // this.http.post('/api/auth/logout', {}).subscribe();
 
     // Redirect the user to the login page
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
   }
   
   

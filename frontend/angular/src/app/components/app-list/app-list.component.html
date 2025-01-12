@@ -1,3 +1,5 @@
+<app-top-bar></app-top-bar>
+
 <div *ngIf="!isLoggedIn; else appsList">
   <p>You must first log in to view apps.</p>
   <a [routerLink]="['/login']">

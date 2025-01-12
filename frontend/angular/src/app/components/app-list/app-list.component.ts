@@ -5,10 +5,12 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { TopBarComponent } from '../top-bar/top-bar.component';
 
 @Component({
   selector: 'app-app-list',
-  imports: [RouterModule, CommonModule, FormsModule],
+  standalone: true, // Mark the component as standalone
+  imports: [RouterModule, CommonModule, FormsModule, TopBarComponent], // Use TopBarComponent in imports
   templateUrl: './app-list.component.html',
   styleUrls: ['./app-list.component.css']
 })
@@ -26,7 +28,7 @@ export class AppListComponent implements OnInit {
 
   ngOnInit(): void {
     const user = localStorage.getItem('authToken');
-    this.isLoggedIn = user ? true : false;
+    this.isLoggedIn = !!user;
     if (this.isLoggedIn) {
       this.appService.getApps().subscribe((data) => {
         this.apps = data;

@@ -3,13 +3,18 @@
     <span class="logo">MindHaven AI</span>
   </div>
   <nav class="nav-links">
-    <a href="/home">HOME</a>
-    <a href="/about">ABOUT</a>
-    <a href="/register">SIGN UP</a>
     <ng-container *ngIf="isLoggedIn; else loggedOut">
+      <!-- Options for logged-in users -->
+      <a href="/apps">APPS</a>
+      <a href="/chatbot">CHAT BOT</a>
+      <a href="/dashboard">DASHBOARD</a>
       <a (click)="logout()" class="logout-link">LOGOUT</a>
     </ng-container>
     <ng-template #loggedOut>
+      <!-- Options for logged-out users -->
+      <a href="/home">HOME</a>
+      <a href="/about">ABOUT</a>
+      <a href="/register">SIGN UP</a>
       <a href="/login">LOGIN</a>
     </ng-template>
   </nav>
