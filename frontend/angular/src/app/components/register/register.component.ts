@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   showPassword: boolean = false; // Controls password visibility
-  selectedRole: string = 'Patient'; // Default selected role
+  selectedRole: string = 'USER'; // Default selected role
 
   constructor(
     private fb: FormBuilder,
@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
   // Dynamically validate Institution field based on role
   updateInstitutionFieldValidation(): void {
     const institutionControl = this.registerForm.get('institution');
-    if (this.selectedRole === 'Researcher') {
+    if (this.selectedRole === 'RESEARCHER') {
       institutionControl?.setValidators([Validators.required]); // Add required validator
     } else {
       institutionControl?.clearValidators(); // Remove validators

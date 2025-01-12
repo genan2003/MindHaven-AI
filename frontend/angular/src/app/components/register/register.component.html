@@ -11,8 +11,8 @@
         >
         <a
           class="highlight-button"
-          [class.selected]="selectedRole === 'Researcher'"
-          (click)="selectRole('Researcher')"
+          [class.selected]="selectedRole === 'RESEARCHER'"
+          (click)="selectRole('RESEARCHER')"
           >Researcher</a
         >
       </div>
@@ -29,7 +29,7 @@
           <input id="email" formControlName="email" type="email" />
         </div>
 
-        <div *ngIf="selectedRole === 'Researcher'" class="form-group">
+        <div *ngIf="selectedRole === 'RESEARCHER'" class="form-group">
           <label for="institution">Institution</label>
           <input id="institution" formControlName="institution" type="text" />
         </div>
