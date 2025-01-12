@@ -1,40 +1,45 @@
 <app-top-bar></app-top-bar>
 
-<div *ngIf="!isLoggedIn; else appsList">
-  <p>You must first log in to view apps.</p>
-  <a [routerLink]="['/login']">
-    <button>Log In</button>
-  </a>
-</div>
+<main class="app-list-page">
+  <div class="app-list-container">
+    <!-- Header -->
+    <h1 class="page-title">MindHaven AI Apps</h1>
 
-<ng-template #appsList>
-  <!-- Filters Section -->
-  <div class="search-filters">
-    <!-- Search by app name -->
-    <input type="text" [(ngModel)]="searchQuery" placeholder="Search by app name" (input)="filterApps()" />
+    <!-- Filters Section -->
+    <div class="search-filters">
+      <!-- Search by app name -->
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        placeholder="Search by app name"
+        (input)="filterApps()"
+        class="search-input"
+      />
 
-    <!-- Filter by age group -->
-    <select [(ngModel)]="selectedAgeGroup" (change)="filterApps()">
-      <option value="">Select Age Group</option>
-      <option *ngFor="let ageGroup of ageGroups" [value]="ageGroup">{{ ageGroup }}</option>
-    </select>
+      <!-- Filter by age group -->
+      <select [(ngModel)]="selectedAgeGroup" (change)="filterApps()" class="filter-select">
+        <option value="">Select Age Group</option>
+        <option *ngFor="let ageGroup of ageGroups" [value]="ageGroup">{{ ageGroup }}</option>
+      </select>
 
-    <!-- Filter by mental health disorder -->
-    <select [(ngModel)]="selectedDisorder" (change)="filterApps()">
-      <option value="">Select Disorder</option>
-      <option *ngFor="let disorder of disorders" [value]="disorder">{{ disorder }}</option>
-    </select>
+      <!-- Filter by mental health disorder -->
+      <select [(ngModel)]="selectedDisorder" (change)="filterApps()" class="filter-select">
+        <option value="">Select Disorder</option>
+        <option *ngFor="let disorder of disorders" [value]="disorder">{{ disorder }}</option>
+      </select>
 
-    <!-- Reset Filters Button -->
-    <button (click)="resetFilters()">Reset Filters</button>
+      <!-- Reset Filters Button -->
+      <button (click)="resetFilters()" class="filter-button">Reset Filters</button>
+    </div>
+
+    <!-- Display Apps -->
+    <div class="app-list">
+      <div *ngFor="let app of filteredApps" class="app-card">
+        <h3>
+          <a [routerLink]="['/apps', app.id]">{{ app.name }}</a>
+        </h3>
+        <p>{{ app.description }}</p>
+      </div>
+    </div>
   </div>
-
-  <!-- Display Apps -->
-  <div *ngFor="let app of filteredApps" class="app-card">
-    <h3>
-      <a [routerLink]="['/apps', app.id]">{{ app.name }}</a> ({{ app.ageGroup }})
-    </h3>
-    <p>{{ app.description }}</p>
-  </div>
-  <button (click)="logout()">Log Out</button>
-</ng-template>
+</main>
