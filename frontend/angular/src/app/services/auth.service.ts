@@ -14,7 +14,6 @@ export interface DecodedToken {
   exp: number; // expiration time
   imports: [RouterModule];
 }
-
 @Injectable({
   providedIn: 'root',
 })
@@ -117,7 +116,23 @@ export class AuthService {
     this.router.navigate(['/home']);
   }
   
+  updateProfile(profileData: any): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.put(
+      `http://localhost:8080/api/auth/users/${profileData.username}/edit-profile`,
+      profileData,
+      { headers }
+    );
+  }
   
+  getUserProfile(): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  
+    return this.http.get('http://localhost:8080/api/auth/users/profile', { headers });
+  }
   
   
 }

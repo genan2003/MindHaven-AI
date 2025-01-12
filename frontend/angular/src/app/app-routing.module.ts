@@ -11,6 +11,7 @@ import { ResearcherGuard } from './guards/researcher.guard';
 import { LoggedInGuard } from './guards/logged-in.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 
 const routes: Routes = [
   // Default route: Redirect based on login status
@@ -28,7 +29,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [LoggedInGuard] },
   { path: 'login', component: LoginComponent, canActivate: [LoggedInGuard] },
 
-  // Private routes
+  { path: 'edit-profile', component: ProfileEditComponent },// Private routes
   { path: 'complete-profile', component: CompleteProfileComponent, canActivate: [LoggedInGuard] },
   { path: 'apps', component: AppListComponent, canActivate: [LoggedInGuard] },
   { path: 'apps/:id', component: AppDetailComponent, canActivate: [LoggedInGuard] },
