@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ChatbotSidebarComponent } from '../chatbot-sidebar/chatbot-sidebar.component';
 
 @Component({
   selector: 'app-chatbot',
   templateUrl: './chatbot.component.html',
   styleUrls: ['./chatbot.component.css'],
-  imports: [ReactiveFormsModule, FormsModule, CommonModule]
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, ChatbotSidebarComponent]
 })
 export class ChatbotComponent {
   messages: { text: string; type: 'user' | 'bot' }[] = [];

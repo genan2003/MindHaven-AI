@@ -24,6 +24,7 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
     AppComponent,
     HomeComponent,
     AboutComponent,
+
   ],
   imports: [
     BrowserModule,

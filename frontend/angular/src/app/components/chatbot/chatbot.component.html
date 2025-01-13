@@ -1,12 +1,25 @@
 <div class="chat-container">
+  <app-chatbot-sidebar></app-chatbot-sidebar> <!-- Sidebar Component -->
+  <div class="chat-main">
     <div class="chat-window">
-      <div *ngFor="let message of messages" [class.user]="message.type === 'user'" [class.bot]="message.type === 'bot'">
+      <div
+        *ngFor="let message of messages"
+        [class.user]="message.type === 'user'"
+        [class.bot]="message.type === 'bot'"
+      >
         <p>{{ message.text }}</p>
       </div>
     </div>
     <form (submit)="sendMessage()" class="chat-input-form">
-      <input type="text" [(ngModel)]="userMessage" placeholder="Ask about mental health..." required />
-      <button type="submit">Send</button>
+      <input
+        type="text"
+        [(ngModel)]="userMessage"
+        placeholder="Message towards BrainPal"
+        required
+      />
+      <button type="submit">
+        <span class="microphone-icon">&#127897;</span>
+      </button>
     </form>
   </div>
-  
+</div>

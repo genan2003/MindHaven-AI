@@ -1,0 +1,79 @@
+.chat-sidebar {
+  background-color: #803a5d;
+  color: #fad6e8;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  height: 100vh;
+  font-family: 'Open Sans', serif;
+}
+
+.logo-container {
+  padding: 20px;
+  display: flex;
+  align-items: center; /* Align icon and text vertically */
+  margin-bottom: 20px;
+}
+
+.logo-icon {
+  width: 50px; /* Adjust size of the icon */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Space between icon and text */
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navigation {
+  width: 100%;
+}
+
+.navigation ul {
+  list-style: none;
+  padding: 0;
+  width: 90%; /* Ensure full width for list items */
+  margin-left: auto; /* Position the list to the right */
+}
+
+.navigation ul li {
+  background-color: transparent; /* Match the background color when unselected */
+  color: #fad6e8; /* Text color matches sidebar */
+  font-weight: 700;
+  padding: 15px; /* Make each item a square shape */
+  text-align: left; /* Align the text inside the box to the left */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth transitions */
+}
+
+.navigation ul li:hover {
+  background-color: #964c73; /* Highlight background on hover */
+}
+
+.navigation ul li:active {
+  background-color: #b0668d; /* Darker highlight when clicked */
+}
+
+.apps-link-container {
+  color: #fad6e8; /* Sidebar text color */
+  font-weight: 700;
+  text-align: center;
+  padding: 15px 0; /* Add spacing around the text */
+  width: 100%;
+  margin-top: auto;
+  font-weight: normal;
+}
+
+.apps-link {
+  color: #b16b82; /* Lighter pink for "here" */
+  font-weight: bold;
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease;
+}
+
+.apps-link:hover {
+  color: #ffe6ed; /* Even lighter pink on hover */
+}
