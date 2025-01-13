@@ -58,26 +58,29 @@ export class RegisterComponent implements OnInit {
     institutionControl?.updateValueAndValidity(); // Update validation state
   }
 
-  // Handle form submission
   onSubmit(): void {
     if (this.registerForm.valid) {
       if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
         alert('Passwords do not match.');
         return;
       }
-
+  
       // Submit registration data
       this.authService.register(this.registerForm.value).subscribe({
-        next: () => {
-          alert('Registration successful!');
-          this.router.navigate(['/login']);
+        next: (response) => {
+          // Check if the backend has returned a success response
+            alert('Registration successful!');
+            this.router.navigate(['/login']);
         },
-        error: () => {
-          alert('Registration failed. Please try again.');
+        error: (err) => {
+          // Handle errors during registration
+          console.error('Error during registration:', err);
+          //alert('Registration failed. Please try again.');
         },
       });
     } else {
       alert('Please fill out all required fields.');
     }
   }
+  
 }
