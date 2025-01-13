@@ -10,6 +10,8 @@ import { AppDetailComponent } from './components/app-detail/app-detail.component
 import { ReviewListComponent } from './components/review-list/review-list.component';
 import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { ResearcherGuard } from './guards/researcher.guard';
+import { ChatbotComponent } from './components/chatbot/chatbot.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent }, // Registration route
@@ -22,6 +24,7 @@ const routes: Routes = [
   { path: 'apps/:id', component: AppDetailComponent }, // Route for app details
   { path: 'apps/:id/reviews', component: ReviewListComponent }, // Route for listing reviews for an app
   { path: 'apps/:id/reviews/new', component: ReviewFormComponent }, // Route for adding a new review
+  { path: 'chatbot', component: ChatComponent},
   { path: '**', redirectTo: '/login' }, // Fallback for undefined routes
 ];
 

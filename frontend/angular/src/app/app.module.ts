@@ -16,10 +16,12 @@ import { AppDetailComponent } from './components/app-detail/app-detail.component
 import { ReviewListComponent } from './components/review-list/review-list.component';
 import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { CommonModule } from '@angular/common';
+import { ChatbotComponent } from './components/chatbot/chatbot.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
