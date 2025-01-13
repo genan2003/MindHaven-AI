@@ -79,7 +79,16 @@ public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         errorResponse.put("error", "Invalid credentials");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
     }
+
+    
 }
+
+@PostMapping("/logout")
+    public ResponseEntity<?> logout() {
+        // Here we don't need to do much since the token is stored on the client-side.
+        // The client just needs to remove the token from storage.
+        return ResponseEntity.ok("Logged out successfully");
+    }
 
     
 

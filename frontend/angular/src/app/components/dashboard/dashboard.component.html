@@ -1,86 +1,95 @@
-<h2>Dashboard</h2>
+<main class="dashboard-page">
+  <div class="dashboard-container">
+    <!-- Left Column: Add App Form -->
+    <div class="dashboard-column">
+      <div class="add-app-form">
+        <h1>Dashboard</h1>
+        <h2>Add a New Therapeutical App</h2>
 
-<!-- Add App Form -->
-<form (ngSubmit)="addApp()" #appForm="ngForm">
-  <div>
-    <label for="name">Name</label>
-    <input
-      type="text"
-      id="name"
-      [(ngModel)]="app.name"
-      name="name"
-      required
-    />
+        <form (ngSubmit)="addApp()" #appForm="ngForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              [(ngModel)]="app.name"
+              name="name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              [(ngModel)]="app.description"
+              name="description"
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ageGroup">Age Group</label>
+            <input
+              type="text"
+              id="ageGroup"
+              [(ngModel)]="app.ageGroup"
+              name="ageGroup"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="mentalHealthDisorder">Mental Health Disorder</label>
+            <input
+              type="text"
+              id="mentalHealthDisorder"
+              [(ngModel)]="app.mentalHealthDisorder"
+              name="mentalHealthDisorder"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            [disabled]="appForm.invalid"
+            class="btn-submit"
+            [title]="
+              appForm.invalid ? 'Please fill all the required fields' : ''
+            "
+          >
+            Add App
+          </button>
+        </form>
+
+        <!-- Back to Home Link -->
+        <p class="redirect-text">
+          Click <a href="/apps" class="redirect-link">here</a> to go to the
+          apps page.
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Column: App List -->
+    <div class="dashboard-column app-list">
+      <h2>Your Therapeutical Apps</h2>
+      <div *ngIf="apps && apps.length > 0; else noApps">
+        <ul>
+          <li *ngFor="let app of apps" class="app-item">
+            <h3>{{ app.name }}</h3>
+            <p><strong>Description:</strong> {{ app.description }}</p>
+            <p><strong>Age Group:</strong> {{ app.ageGroup }}</p>
+            <p>
+              <strong>Mental Health Disorder:</strong>
+              {{ app.mentalHealthDisorder }}
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <ng-template #noApps>
+        <p class="no-apps-message">No apps found. Please add some.</p>
+      </ng-template>
+    </div>
   </div>
-
-  <div>
-    <label for="description">Description</label>
-    <textarea
-      id="description"
-      [(ngModel)]="app.description"
-      name="description"
-      required
-    ></textarea>
-  </div>
-
-  <div>
-    <label for="ageGroup">Age Group</label>
-    <input
-      type="text"
-      id="ageGroup"
-      [(ngModel)]="app.ageGroup"
-      name="ageGroup"
-      required
-    />
-  </div>
-
-  <div>
-    <label for="mentalHealthDisorder">Mental Health Disorder</label>
-    <input
-      type="text"
-      id="mentalHealthDisorder"
-      [(ngModel)]="app.mentalHealthDisorder"
-      name="mentalHealthDisorder"
-      required
-    />
-  </div>
-
-  <button type="submit" [disabled]="appForm.invalid">Add App</button>
-</form>
-
-<hr />
-
-<div *ngIf="apps && apps.length > 0; else noApps">
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Age Group</th>
-        <th>Mental Health Disorder</th>
-        <th>Views</th>
-        <th>Recommended</th>
-        <th>Probability</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let app of apps">
-        <td>{{ app.name }}</td>
-        <td>{{ app.description }}</td>
-        <td>{{ app.ageGroup }}</td>
-        <td>{{ app.mentalHealthDisorder }}</td>
-        <td>{{ app.views }}</td>
-        <td>{{ app.recommended ? 'Yes' : 'No' }}</td>
-        <td>{{ app.probability | percent }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<ng-template #noApps>
-  <p>No therapeutic apps found. Please add an app to see it here.</p>
-</ng-template>
-
-
-
-
+</main>

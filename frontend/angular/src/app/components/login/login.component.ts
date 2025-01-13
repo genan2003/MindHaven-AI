@@ -7,15 +7,19 @@ import { Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule], // Add FormsModule here
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  credentials = { username: '', password: '' }; // Use this for binding form data
-  loginForm: any; // Remove if not used
+  credentials = { username: '', password: '' }; // For binding form data
+  showPassword: boolean = false; // Controls password visibility
 
-  constructor(private authService: AuthService, private router: Router) {} // Inject services
+  constructor(private authService: AuthService, private router: Router) {}
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 
   onSubmit() {
     console.log('Attempting to log in with credentials:', this.credentials);
@@ -28,19 +32,20 @@ export class LoginComponent {
         // Decode the token to extract user role and other details
         const userDetails = this.authService.decodeToken(token);
         const role = userDetails.role;
-        const profileCompleted = userDetails.profileCompleted; // Assuming profileCompleted is in the token payload
+        const profileCompleted = response.profileCompleted; // Get the profile completion status from the response
   
-        // Store token and username in localStorage
+        // Store token, username, role, and profile completion status in localStorage
         localStorage.setItem('authToken', token);
         localStorage.setItem('username', this.credentials.username);
         localStorage.setItem('role', role);
+        localStorage.setItem('profileCompleted', JSON.stringify(profileCompleted)); // Store profile completion status
   
         // Routing based on role and profile completion status
         if (role === 'RESEARCHER') {
           this.router.navigate(['/dashboard']);
         } else if (role === 'USER') {
           if (profileCompleted) {
-            this.router.navigate(['/user-homepage']);
+            this.router.navigate(['/apps']);
           } else {
             this.router.navigate(['/complete-profile']);
           }
@@ -55,11 +60,5 @@ export class LoginComponent {
       },
     });
   }
-  
-  
-  
-  
-  
-  
   
 }

@@ -16,6 +16,8 @@ import org.springframework.web.client.RestTemplate;
 
 import databases.project.backend.entity.TherapeuticApp;
 import databases.project.backend.repository.TherapeuticalAppRepository;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/apps")
@@ -41,6 +43,19 @@ public class TherapeuticalAppController {
         TherapeuticApp savedApp = appRepository.save(app);
         return ResponseEntity.ok(savedApp);
     }
+
+    @GetMapping("/apps")
+    public ResponseEntity<List<TherapeuticApp>> getAllApps(Principal principal) {
+        if (principal == null) {
+            System.out.println("Principal is null - user not authenticated");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+        }
+    
+        List<TherapeuticApp> apps = appRepository.findAll();
+        System.out.println("Apps fetched: " + apps.size());
+        return ResponseEntity.ok(apps);
+    }
+    
 
     @GetMapping
     public ResponseEntity<List<TherapeuticApp>> getApps(Principal principal) {

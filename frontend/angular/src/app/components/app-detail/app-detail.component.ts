@@ -6,21 +6,26 @@ import { TherapeuticAppService } from '../../services/therapeutic-app.service';
 import { ReviewService } from '../../services/review.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TopBarComponent } from '../top-bar/top-bar.component'; // Import the TopBarComponent
 
 @Component({
   selector: 'app-app-detail',
   templateUrl: './app-detail.component.html',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, TopBarComponent], // Add TopBarComponent here
   styleUrls: ['./app-detail.component.css']
 })
 export class AppDetailComponent implements OnInit {
   appId!: number;
+  canSubmitReview = true;
+  errorMessage = '';
   app!: TherapeuticalApp;
   reviews: Review[] = [];
+  loggedInUserId = undefined; // Replace with logic to get the logged-in user ID
   newReview: Review = {
     reviewId: 0,
     appId: 0,
     userId: 0,
+    username: '',
     rating: 0,
     reviewText: '',
     createdAt: ''
@@ -33,9 +38,40 @@ export class AppDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getUser();
     this.appId = +this.route.snapshot.paramMap.get('id')!;
     this.fetchAppDetails();
-    this.fetchReviews();
+    this.checkIfUserCanSubmitReview();
+  }
+
+  getUser(): void {
+    this.reviewService.getLoggedInUser().subscribe(
+      (user) => {
+        this.loggedInUserId = user?.userId;
+        console.log('User details fetched:', user);
+        console.log('Logged in user ID:', this.loggedInUserId);
+  
+        // Fetch reviews only after user ID is retrieved
+        this.fetchReviews();
+        this.checkIfUserCanSubmitReview();
+      },
+      (error) => {
+        console.error('Error fetching user details', error);
+        this.errorMessage = 'Unable to fetch user details.';
+      }
+    );
+  }
+  
+
+  checkIfUserCanSubmitReview(): void {
+    this.reviewService.hasUserReviewed(this.appId).subscribe(
+      (hasReviewed) => {
+        this.canSubmitReview = !hasReviewed;
+      },
+      (error) => {
+        this.errorMessage = 'Unable to check review status.';
+      }
+    );
   }
 
   fetchAppDetails(): void {
@@ -48,10 +84,11 @@ export class AppDetailComponent implements OnInit {
       }
     );
   }
-  
+
   fetchReviews(): void {
-    this.reviewService.getReviewsByAppId(this.appId).subscribe(
+    this.reviewService.getReviewsByAppId(this.appId, this.loggedInUserId!).subscribe(
       (data) => {
+        console.log('Fetched reviews:', data);
         this.reviews = data;
       },
       (error) => {
@@ -61,18 +98,58 @@ export class AppDetailComponent implements OnInit {
   }
 
   submitReview(): void {
-    this.newReview.appId = this.appId;
-  
-    // Assuming this.newReview is properly set and contains the review data
-  
-    // Call the service method to submit the review with the Authorization header
-    this.reviewService.addReview(this.appId, this.newReview).subscribe(
-      (data) => {
-        this.reviews.push(data);
-        this.newReview = { reviewId: 0, appId: 0, userId: 0, rating: 0, reviewText: '', createdAt: '' };
+  this.newReview.appId = this.appId;
+  this.newReview.userId = this.loggedInUserId;
+
+  if (!this.loggedInUserId) {
+    alert('Please log in before submitting a review.');
+    return;
+  }
+
+  if (!this.canSubmitReview) {
+    alert('You have already submitted a review for this app.');
+    return;
+  }
+
+  // Get the username from local storage or a user service
+  const username = localStorage.getItem('username');  // Assuming 'username' is stored in local storage
+
+  if (!username) {
+    alert('Username not found. Please log in.');
+    return;
+  }
+
+  // Add the username to the review object
+  this.newReview.username = username;
+
+  console.log('Submitting review:', this.newReview); // Log newReview before sending to backend
+
+  this.reviewService.addReview(this.appId, this.newReview).subscribe(
+    (data) => {
+      console.log('Received data:', data);
+      if (data) {
+        this.reviews.push(data);  // Add the new review to the list
+        this.canSubmitReview = false;
+        this.newReview = { reviewId: 0, appId: 0, userId: 0, username: '', rating: 0, reviewText: '', createdAt: '' }; // Reset form fields
+      } else {
+        console.error('No data returned from the API');
+      }
+    },
+    (error) => {
+      console.error('Error while submitting review:', error);
+    }
+  );
+}
+
+
+  deleteReview(reviewId: number): void {
+    this.reviewService.deleteReview(reviewId).subscribe(
+      () => {
+        this.reviews = this.reviews.filter((review) => review.reviewId !== reviewId);
+        this.canSubmitReview = true;
       },
       (error) => {
-        console.error('Failed to submit review:', error);
+        console.error('Failed to delete review:', error);
       }
     );
   }

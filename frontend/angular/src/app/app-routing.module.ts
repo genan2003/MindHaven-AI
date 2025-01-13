@@ -7,25 +7,37 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { AppListComponent } from './components/app-list/app-list.component';
 import { AppDetailComponent } from './components/app-detail/app-detail.component';
-import { ReviewListComponent } from './components/review-list/review-list.component';
-import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { ResearcherGuard } from './guards/researcher.guard';
-import { ChatbotComponent } from './components/chatbot/chatbot.component';
-import { ChatComponent } from './components/chat/chat.component';
+import { LoggedInGuard } from './guards/logged-in.guard';
+import { HomeComponent } from './pages/home/home.component';
+import { AboutComponent } from './pages/about/about.component';
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 
 const routes: Routes = [
-  { path: 'register', component: RegisterComponent }, // Registration route
-  { path: 'login', component: LoginComponent }, // Login route
-  { path: 'complete-profile', component: CompleteProfileComponent }, // Profile completion route
-  { path: 'dashboard', component: DashboardComponent, canActivate: [ResearcherGuard] }, // Dashboard route with guard
-  { path: 'unauthorized', component: UnauthorizedComponent }, // Unauthorized access route
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Default redirection to login
-  { path: 'apps', component: AppListComponent }, // Route to list all apps
-  { path: 'apps/:id', component: AppDetailComponent }, // Route for app details
-  { path: 'apps/:id/reviews', component: ReviewListComponent }, // Route for listing reviews for an app
-  { path: 'apps/:id/reviews/new', component: ReviewFormComponent }, // Route for adding a new review
-  { path: 'chatbot', component: ChatComponent},
-  { path: '**', redirectTo: '/login' }, // Fallback for undefined routes
+  // Default route: Redirect based on login status
+  {
+    path: '',
+    canActivate: [LoggedInGuard], // Guard determines if the user should be redirected to /apps
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+    ],
+  },
+
+  // Public routes
+  { path: 'home', component: HomeComponent, canActivate: [LoggedInGuard] },
+  { path: 'about', component: AboutComponent, canActivate: [LoggedInGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [LoggedInGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [LoggedInGuard] },
+
+  { path: 'edit-profile', component: ProfileEditComponent },// Private routes
+  { path: 'complete-profile', component: CompleteProfileComponent, canActivate: [LoggedInGuard] },
+  { path: 'apps', component: AppListComponent, canActivate: [LoggedInGuard] },
+  { path: 'apps/:id', component: AppDetailComponent, canActivate: [LoggedInGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [ResearcherGuard] },
+
+  // Unauthorized and fallback routes
+  { path: 'unauthorized', component: UnauthorizedComponent },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

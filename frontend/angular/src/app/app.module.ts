@@ -11,17 +11,19 @@ import { LoginComponent } from './components/login/login.component';
 import { CompleteProfileComponent } from './components/complete-profile/complete-profile.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
-import { AppListComponent } from './components/app-list/app-list.component'; // Added
+import { AppListComponent } from './components/app-list/app-list.component'; 
 import { AppDetailComponent } from './components/app-detail/app-detail.component';
-import { ReviewListComponent } from './components/review-list/review-list.component';
-import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { CommonModule } from '@angular/common';
-import { ChatbotComponent } from './components/chatbot/chatbot.component';
-import { ChatComponent } from './components/chat/chat.component';
+import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AboutComponent } from './pages/about/about.component';
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import { ChatComponent } from './components/chat/chat.component';
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
-    CommonModule
+    CommonModule,
+    TopBarComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

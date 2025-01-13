@@ -1,0 +1,156 @@
+/* Home Page Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+  height: 100%; /* Ensure the body and html take the full height */
+}
+
+main {
+  height: 100%; /* Ensure main takes the full height of the page */
+}
+
+.home-content {
+  font-family: 'Open Sans', serif; /* Use the imported font */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 5%; /* Adjust padding as needed */
+  width: 100%; /* Stretch the width to full screen */
+  height: calc(100vh - 60px); /* Full viewport height minus the height of the top bar */
+  box-sizing: border-box; /* Ensure padding is included in the dimensions */
+  background-color: #fce4ec;
+}
+
+/* Text Content */
+.text-content {
+  max-width: 50%; /* Restrict text content width */
+}
+
+.text-content h4 {
+  font-size: 1.2rem;
+  color: #cd6a9c; /* Pink subtitle color */
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.text-content h1 {
+  font-size: 3.5rem;
+  line-height: 1.2;
+  font-weight: 900;
+  color: #000; /* Black headline color */
+  margin-bottom: 1rem;
+}
+
+.text-content p {
+  font-size: 1rem;
+  color: #cd6a9c; /* Light pink text */
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.action-buttons a {
+  text-decoration: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Login Button */
+.action-buttons .login {
+  position: relative; /* Required for pseudo-element positioning */
+  text-decoration: none; /* Remove underline */
+  color: #762e52; /* Text color */
+  background: none; /* Transparent background */
+  font-weight: bold; /* Bold text */
+  font-size: 1rem; /* Adjust font size */
+  padding: 0.7rem 1.5rem; /* Button spacing */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: color 0.3s ease; /* Smooth text color transition */
+}
+
+.action-buttons .login:hover {
+  color: #5a2340; /* Change text color on hover */
+}
+
+/* Hover Effect (Scaling Bar) */
+.action-buttons .login::after {
+  content: ''; /* Empty content for the pseudo-element */
+  position: absolute;
+  bottom: 0; /* Position the bar at the bottom of the button */
+  left: 50%; /* Start from the center */
+  width: 0%; /* Initial width is 0% */
+  height: 3px; /* Height of the bar */
+  background-color: #762e52; /* Bar color */
+  border-radius: 2px; /* Make the bar slightly rounded */
+  transform: translateX(-50%); /* Center the bar horizontally */
+  transition: width 0.3s ease; /* Smooth animation for width */
+}
+
+.action-buttons .login:hover::after {
+  width: 80%; /* Expand the bar to the full width of the button */
+}
+
+
+.action-buttons .sign-in {
+  display: inline-block; /* Ensure proper button dimensions */
+  text-decoration: none; /* Remove underline */
+  padding: 0.7rem 2rem; /* Adjust padding for size */
+  border-radius: 9999px; /* Fully rounded corners */
+  background-color: #762e52; /* Button background color */
+  color: #f5c3d6; /* Text color */
+  font-weight: bold; /* Bold text */
+  font-size: 1rem; /* Adjust text size */
+  text-align: center; /* Center text */
+  border: none; /* Remove border */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover animation */
+}
+
+.action-buttons .sign-in:hover {
+  background-color: #44162e; /* Darken the background on hover */
+}
+
+
+/* Image Content */
+.image-content {
+  max-width: 45%;
+}
+
+.image-content img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  display: block;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .home-content {
+    flex-direction: column;
+    text-align: center;
+    height: auto; /* Allow content to grow naturally on smaller screens */
+  }
+
+  .text-content, .image-content {
+    max-width: 100%;
+  }
+
+  .image-content img {
+    margin: 2rem auto 0;
+  }
+
+  .action-buttons {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+}

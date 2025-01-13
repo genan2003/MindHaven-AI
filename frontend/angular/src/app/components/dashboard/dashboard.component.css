@@ -1,17 +1,191 @@
+/* Dashboard Page Styling */
+.dashboard-page {
+  font-family: 'Open Sans', serif; /* Use the imported font */
+  background-color: #cd6a9c; /* Pink background */
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: center; /* Center the container horizontally */
+  align-items: center; /* Center the container vertically */
+  padding: 1rem; /* Add some padding around the edges */
+  box-sizing: border-box;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+/* Dashboard Container */
+.dashboard-container {
+  background-color: #fff; /* White container */
+  border-radius: 15px;
+  display: flex; /* Flexbox layout for two columns */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  padding: 2rem;
+  width: 90%; /* Make it responsive: take 90% of the screen width */
+  max-width: 1000px; /* Limit the container width */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  gap: 2rem; /* Space between columns */
+  box-sizing: border-box;
+}
+
+/* Dashboard Column */
+.dashboard-column {
+  flex: 1; /* Each column takes equal space */
+  min-width: 300px; /* Minimum width for responsiveness */
+}
+
+/* Add App Form Styling */
+.add-app-form h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #4e3b47;
+}
+
+.add-app-form h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.add-app-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.add-app-form label {
+  font-size: 0.9rem;
+  color: #4e3b47;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.add-app-form input,
+.add-app-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #cd6a9c;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  color: #4e3b47;
+  box-sizing: border-box;
+}
+
+.add-app-form textarea {
+  height: 100px; /* Fixed height for description */
+  resize: none;
+}
+
+/* Normal Submit Button */
+.btn-submit {
+  display: inline-block;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  background-color: #762e52;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-submit:hover {
+  background-color: #5a2340;
+}
+
+/* Disabled Button */
+.btn-submit:disabled {
+  background-color: #cccccc; /* Gray background */
+  color: #666666; /* Muted text color */
+  cursor: not-allowed; /* Disabled cursor */
+  box-shadow: none; /* Remove shadow for disabled state */
+}
+
+
+/* App List Styling */
 .app-list ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .app-list li {
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    padding: 15px;
-    border-radius: 8px;
-  }
-  
-  .app-list h3 {
-    margin: 0;
-    color: #2c3e50;
-  }
-  
+  list-style-type: none;
+  padding: 0;
+}
+
+.app-list li {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-list h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.no-apps-message {
+  text-align: left;
+  color: #762e52;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+/* App List Column */
+.app-list {
+  max-height: 80vh; /* Restrict the height to 80% of the viewport */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 1rem; /* Add padding to avoid content touching the scroll bar */
+}
+
+/* Optional: Customize Scrollbar (for Webkit Browsers) */
+.app-list::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.app-list::-webkit-scrollbar-thumb {
+  background-color: #cd6a9c; /* Scrollbar thumb color */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.app-list::-webkit-scrollbar-thumb:hover {
+  background-color: #762e52; /* Darker color on hover */
+}
+
+.app-list::-webkit-scrollbar-track {
+  background-color: #f0f0f0; /* Track background color */
+}
+/* Redirect Text */
+.redirect-text {
+  font-size: 0.8rem;
+  color: #4e3b47;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.redirect-link {
+  color: #762e52;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+  display: inline-block; /* Ensures the underline applies only to the text */
+}
+
+.redirect-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: #762e52;
+  transition: width 0.3s ease;
+  margin-top: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 9999px; /* Rounded underline */
+}
+
+.redirect-link:hover {
+  color: #4e3b47; /* Darken the text color on hover */
+}
+
+.redirect-link:hover::after {
+  width: 100%; /* Underline expands fully on hover */
+}

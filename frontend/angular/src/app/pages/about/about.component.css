@@ -1,0 +1,113 @@
+/* Global Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+  height: 100%; /* Ensure full height */
+}
+
+main {
+  height: 100%; /* Ensure main takes the full height of the page */
+}
+
+/* About Content Section */
+.about-content {
+  font-family: 'Open Sans', serif; /* Use the imported font */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 5%; /* Padding around the content */
+  height: calc(100vh - 60px); /* Full height minus top bar */
+  background-color: #fce4ec; /* Light pink background */
+  box-sizing: border-box;
+}
+
+/* Text Content */
+.text-content {
+  max-width: 50%; /* Restrict text content width */
+}
+
+.text-content .headline-bar {
+  width: 10%; /* Make width relative to viewport or text width */
+  min-width: 150px; /* Ensure a minimum width */
+  max-width: 300px; /* Ensure it doesn't grow too large */
+  height: 6px; /* Increase the height for a bolder appearance */
+  background-color: #762e52; /* Dark purple color for the bar */
+  margin-bottom: 1rem;
+  transition: width 0.3s ease; /* Smooth animation on resize */
+}
+
+.text-content h1 {
+  font-size: 2.8rem; /* Slightly increase heading size */
+  line-height: 1.3;
+  font-weight: 900;
+  color: #4e3b47; /* Dark text color */
+  margin-bottom: 1rem;
+}
+
+.text-content p {
+  font-size: 1rem;
+  color: #a08691; /* Muted text color */
+  margin-bottom: 2rem;
+}
+
+/* Action Buttons */
+.action-buttons .sign-in {
+  display: inline-block; /* Ensure proper button dimensions */
+  text-decoration: none; /* Remove underline */
+  padding: 0.7rem 2rem; /* Adjust padding for size */
+  border-radius: 9999px; /* Fully rounded corners */
+  background-color: #762e52; /* Button background color */
+  color: #f5c3d6; /* Text color */
+  font-weight: bold; /* Bold text */
+  font-size: 1rem; /* Adjust text size */
+  text-align: center; /* Center text */
+  border: none; /* Remove border */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover animation */
+}
+
+.action-buttons .sign-in:hover {
+  background-color: #44162e; /* Darken the background on hover */
+}
+
+
+/* Image Content */
+.image-content {
+  max-width: 45%;
+}
+
+.image-content img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  display: block;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .about-content {
+      flex-direction: column;
+      text-align: center;
+      height: auto;
+  }
+
+  .text-content {
+      max-width: 100%;
+  }
+
+  .text-content .headline-bar {
+      width: 30%; /* Adjust for smaller screens */
+      min-width: 100px; /* Ensure it doesn't get too small */
+  }
+
+  .image-content {
+      max-width: 100%;
+      margin-top: 2rem;
+  }
+
+  .image-content img {
+      max-width: 300px; /* Smaller image on mobile */
+  }
+}

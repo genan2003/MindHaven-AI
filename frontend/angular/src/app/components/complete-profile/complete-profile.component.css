@@ -1,0 +1,106 @@
+/* Full Page Styling */
+.complete-profile-page {
+    font-family: 'Open Sans', serif;
+    background-color: #fce4ec; /* Light pink background */
+    height: calc(100vh - 60px); /* Full height minus top bar height */
+    display: flex;
+    justify-content: center; /* Center the container horizontally */
+    align-items: center; /* Center the container vertically */
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
+  /* Container */
+  .complete-profile-container {
+    background-color: #fff;
+    border-radius: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2rem;
+    width: 80%; /* Responsive width */
+    max-width: 600px; /* Adjusted max width */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    gap: 1.5rem; /* Reduced gap between elements */
+    justify-content: center;
+  }
+  
+  /* Profile Image */
+  .profile-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 100%;
+    margin-bottom: 0.5rem; /* Reduced space below the profile image */
+  }
+  
+  .profile-initials {
+    width: 100px; /* Keep size unchanged */
+    height: 100px;
+    background-color: #762e52;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Profile Form */
+  .profile-form {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .profile-form h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem; /* Reduced space below heading */
+    color: #4e3b47;
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem; /* Keep space between form groups unchanged */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    font-size: 0.9rem;
+    color: #4e3b47;
+    margin-bottom: 0.5rem;
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #cd6a9c;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: #4e3b47;
+    box-sizing: border-box;
+  }
+  
+  /* Submit Button */
+  .btn-submit {
+    display: inline-block;
+    width: 100%;
+    padding: 0.7rem; /* Keep size unchanged */
+    border-radius: 9999px;
+    background-color: #762e52;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem; /* Keep font size unchanged */
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .btn-submit:hover {
+    background-color: #5a2340;
+  }
+  
