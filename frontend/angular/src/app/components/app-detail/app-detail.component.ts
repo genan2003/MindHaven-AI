@@ -6,11 +6,12 @@ import { TherapeuticAppService } from '../../services/therapeutic-app.service';
 import { ReviewService } from '../../services/review.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TopBarComponent } from '../top-bar/top-bar.component'; // Import the TopBarComponent
 
 @Component({
   selector: 'app-app-detail',
   templateUrl: './app-detail.component.html',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, TopBarComponent], // Add TopBarComponent here
   styleUrls: ['./app-detail.component.css']
 })
 export class AppDetailComponent implements OnInit {

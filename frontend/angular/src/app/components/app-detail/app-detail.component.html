@@ -1,43 +1,50 @@
-<div *ngIf="app" class="app-details">
-  <h2>{{ app.name }}</h2>
-  <p>{{ app.description }}</p>
+<app-top-bar></app-top-bar>
 
-  <h3>Reviews</h3>
-  <div *ngFor="let review of reviews" class="review">
-    <p>{{ review.username }}</p>
-    <p><strong>Rating:</strong> {{ review.rating }}/5</p>
-    <p>{{ review.reviewText }}</p>
-    <!-- Only show delete button if loggedInUserId is available and matches the review's userId -->
-    <button
-      *ngIf="loggedInUserId && review.userId === loggedInUserId"
-      (click)="deleteReview(review.reviewId!)"
-    >
-      Delete Review
-    </button>
+<main class="app-details-page">
+  <div class="app-details-container">
+    <!-- Header -->
+    <h1 class="page-title">{{ app.name }}</h1>
+    <p class="app-description">{{ app.description }}</p>
+
+    <!-- Reviews Section -->
+    <h3 class="reviews-title">Reviews</h3>
+    <div *ngFor="let review of reviews" class="review">
+      <p class="review-username">{{ review.username }}</p>
+      <p><strong>Rating:</strong> {{ review.rating }}/5</p>
+      <p>{{ review.reviewText }}</p>
+      <button
+        *ngIf="loggedInUserId && review.userId === loggedInUserId"
+        (click)="deleteReview(review.reviewId!)"
+        class="delete-review-button"
+      >
+        Delete Review
+      </button>
+    </div>
+
+<!-- Form for submitting a review -->
+<form *ngIf="canSubmitReview; else alreadyReviewed" (ngSubmit)="submitReview()" class="review-form">
+  <label for="rating">Rating:</label>
+  <div class="star-rating">
+    <!-- Star inputs for ratings, now properly working from 1 to 5 -->
+    <input type="radio" id="star1" name="rating" value="1" [(ngModel)]="newReview.rating" />
+    <label for="star1">★</label>
+    <input type="radio" id="star2" name="rating" value="2" [(ngModel)]="newReview.rating" />
+    <label for="star2">★</label>
+    <input type="radio" id="star3" name="rating" value="3" [(ngModel)]="newReview.rating" />
+    <label for="star3">★</label>
+    <input type="radio" id="star4" name="rating" value="4" [(ngModel)]="newReview.rating" />
+    <label for="star4">★</label>
+    <input type="radio" id="star5" name="rating" value="5" [(ngModel)]="newReview.rating" />
+    <label for="star5">★</label>
   </div>
 
-  <form *ngIf="canSubmitReview; else alreadyReviewed" (ngSubmit)="submitReview()">
-    <label for="rating">Rating:</label>
-    <input
-      type="number"
-      id="rating"
-      [(ngModel)]="newReview.rating"
-      name="rating"
-      required
-      min="1"
-      max="5"
-    />
-    <label for="reviewText">Review:</label>
-    <textarea
-      id="reviewText"
-      [(ngModel)]="newReview.reviewText"
-      name="reviewText"
-      required
-    ></textarea>
-    <button type="submit">Submit Review</button>
-  </form>
+  <label for="reviewText">Review:</label>
+  <textarea id="reviewText" [(ngModel)]="newReview.reviewText" name="reviewText" required></textarea>
+  <button type="submit" class="btn-submit">Submit Review</button>
+</form>
 
-  <ng-template #alreadyReviewed>
-    <p>You have already submitted a review for this app.</p>
-  </ng-template>
-</div>
+    <ng-template #alreadyReviewed>
+      <p class="already-reviewed-msg">You have already submitted a review for this app.</p>
+    </ng-template>
+  </div>
+</main>
