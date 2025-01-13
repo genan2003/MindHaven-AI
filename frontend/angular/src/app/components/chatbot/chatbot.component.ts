@@ -11,7 +11,7 @@ import { ChatbotSidebarComponent } from '../chatbot-sidebar/chatbot-sidebar.comp
   imports: [ReactiveFormsModule, FormsModule, CommonModule, ChatbotSidebarComponent]
 })
 export class ChatbotComponent {
-  messages: { text: string; type: 'user' | 'bot' }[] = [];
+  messages: { text: string; type: 'user' | 'bot' }[] = []; // Start with an empty array
   userMessage: string = '';
 
   constructor(private http: HttpClient) {}
