@@ -13,6 +13,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   // Default route: Redirect based on login status
@@ -35,7 +36,7 @@ const routes: Routes = [
   { path: 'apps', component: AppListComponent, canActivate: [LoggedInGuard] },
   { path: 'apps/:id', component: AppDetailComponent, canActivate: [LoggedInGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [ResearcherGuard] },
-  { path: 'chatbot', component: ChatbotComponent, canActivate: [LoggedInGuard] },
+  { path: 'chatbot', component: ChatComponent, canActivate: [LoggedInGuard] },
 
   // Unauthorized and fallback routes
   { path: 'unauthorized', component: UnauthorizedComponent },

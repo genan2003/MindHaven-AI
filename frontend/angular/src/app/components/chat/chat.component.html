@@ -1,19 +1,26 @@
 <div class="chat-container">
-    <div class="chat-box">
-      <div *ngFor="let msg of conversation">
-        <div class="message" [ngClass]="{ 'user': msg.sender === 'User', 'bot': msg.sender === 'Bot' }">
-          <strong>{{ msg.sender }}:</strong> {{ msg.message }}
-        </div>
+  <app-chatbot-sidebar></app-chatbot-sidebar> <!-- Sidebar Component -->
+  <div class="chat-main">
+    <div class="chat-window">
+      <div
+        *ngFor="let message of messages"
+        [class.user]="message.type === 'user'"
+        [class.bot]="message.type === 'bot'"
+      >
+        <p>{{ message.text }}</p>
       </div>
     </div>
-    <div class="input-container">
+    <form (ngSubmit)="sendMessage()" class="chat-input-form">
       <input
+        type="text"
         [(ngModel)]="userMessage"
-        placeholder="Type your message..."
-        (keyup.enter)="sendMessage()"
-        class="chat-input"
+        name="userMessage"
+        placeholder="Message towards BrainPal"
+        required
       />
-      <button (click)="sendMessage()" class="send-button">Send</button>
-    </div>
+      <button type="submit">
+        <span class="send-request">Send</span>
+      </button>
+    </form>
   </div>
-  
+</div>
