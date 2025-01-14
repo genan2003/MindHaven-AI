@@ -1,7 +1,3 @@
-Here's a draft for your README file based on your provided information:
-
----
-
 # Database Project
 
 This project aims to assist researchers in testing and improving applications that help people with mental disorders. The app includes several functionalities to support research and enhance user experience.
