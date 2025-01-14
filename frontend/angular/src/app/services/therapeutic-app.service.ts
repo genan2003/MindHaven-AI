@@ -20,7 +20,7 @@ export class TherapeuticAppService {
     const token = this.getAuthToken();  // Get the token
     const headers = token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : new HttpHeaders();
   
-    return this.http.get<TherapeuticalApp[]>(`${this.apiUrl}`, { headers });
+    return this.http.get<TherapeuticalApp[]>(`${this.apiUrl}/apps`, { headers });
   }
   
   getAppById(appId: number): Observable<TherapeuticalApp> {

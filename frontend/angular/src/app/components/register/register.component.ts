@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
       role: [this.selectedRole], // Default role is Patient
-      institution: [''], // Institution field, initially empty
+      institution: 0, // Institution field, initially empty
     });
 
     this.updateInstitutionFieldValidation(); // Ensure initial validation is applied
